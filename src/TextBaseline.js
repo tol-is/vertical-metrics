@@ -46,9 +46,8 @@ export default ({ children, fontSize, leading = 0 }) => {
     <span
       className={css`
           display: inline-block;
-          vertical-align: bottom;
+          vertical-align: baseline;
           position: relative;
-          margin-bottom: ${3 * baseline}px;
           font-family: '${font.familyName}';
           font-weight: ${font['OS/2'].usWeightClass};
           font-size: ${fontSize}px;

@@ -32,6 +32,7 @@ export default () => {
       <div
         className={css`
           margin-bottom: 48px;
+          background-color: rgba(0, 0, 0, 0.2);
         `}
       >
         <TextBaseline fontSize={120} leading={0}>

@@ -8,7 +8,6 @@ import blobToBuffer from 'blob-to-buffer';
 
 import FontContext from './FontContext';
 
-// const GOOGLE_FONTS_KEY = 'AIzaSyAPLksVreelN66UCRs9xiWND4TMR2QZkVE';
 import fonts from './fonts.json';
 
 // 2860
@@ -27,7 +26,7 @@ export default () => {
     console.log(idx, file);
 
     if (file) {
-      loadURL(file);
+      loadURL(file.replace('http:', 'https:'));
     }
   }, [idx]);
 
