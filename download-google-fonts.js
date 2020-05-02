@@ -27,15 +27,14 @@ const downloadFonts = async (webfonts) => {
   const fonts = [];
   await asyncForEach(webfonts, async (webfont) => {
     const fileKeys = Object.keys(webfont.files);
-    const localWf = {
-      ...webfont,
-      files: {},
-    };
+
     await asyncForEach(fileKeys, async (key) => {
-      const localFile = await downloadFileAsync(webfont.files[key]);
-      localWf.files[key] = localFile;
+      fonts.push({
+        family: webfont.family,
+        file: webfont.files[key],
+        key: key,
+      });
     });
-    fonts.push(localWf);
   });
   return fonts;
 };
@@ -47,5 +46,5 @@ fetch(
   .then((res) => downloadFonts(res.items))
   .then((fonts) => {
     let json = JSON.stringify(fonts, null, 4);
-    fs.writeFileSync('fonts.json', json);
+    fs.writeFileSync('./src/fonts.json', json);
   });

@@ -8,7 +8,8 @@ import blobToBuffer from 'blob-to-buffer';
 
 import FontContext from './FontContext';
 
-import fonts from './results.json';
+// const GOOGLE_FONTS_KEY = 'AIzaSyAPLksVreelN66UCRs9xiWND4TMR2QZkVE';
+import fonts from './fonts.json';
 
 // 2860
 
@@ -21,7 +22,9 @@ export default () => {
   const { idx = 0 } = params;
 
   useEffect(() => {
-    let file = `http://localhost:1234${fonts[idx].file}`;
+    let file = fonts[idx].file;
+
+    console.log(idx, file);
 
     if (file) {
       loadURL(file);
