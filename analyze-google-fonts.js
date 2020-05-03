@@ -51,18 +51,19 @@ const analyze = async () => {
       xHeight: font.xHeight,
       capHeight: font.capHeight,
       useTypoMetrics: os2.fsSelection.useTypoMetrics,
+
       hheaAscender: font.hhea.ascent,
       typoAscender: os2.typoAscender,
       winAscent: os2.winAscent,
-      winAscentDif: font.hhea.ascent - os2.winAscent,
-      hheaAscentDif: font.hhea.ascent - font.hhea.ascent,
-      typoAscentDif: font.hhea.ascent - os2.typoAscender,
+      winAscentDif: Math.abs(font.hhea.ascent) - Math.abs(os2.winAscent),
+      hheaAscentDif: Math.abs(font.hhea.ascent) - Math.abs(font.hhea.ascent),
+      typoAscentDif: Math.abs(font.hhea.ascent) - Math.abs(os2.typoAscender),
       hheaDescender: font.hhea.descent,
       typoDescender: os2.typoDescender,
       winDescent: os2.winDescent,
-      winDescentDif: font.hhea.descent - os2.winDescent,
-      hheaDescentDif: font.hhea.descent - font.hhea.descent,
-      typoDescentDif: font.hhea.descent - os2.typoDescender,
+      winDescentDif: Math.abs(font.hhea.descent) - Math.abs(os2.winDescent),
+      hheaDescentDif: Math.abs(font.hhea.descent) - Math.abs(font.hhea.descent),
+      typoDescentDif: Math.abs(font.hhea.descent) - Math.abs(os2.typoDescender),
     };
 
     fonts.push(res);
