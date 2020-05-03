@@ -68,7 +68,7 @@ const analyze = async () => {
         hheaAscentDif: font.ascent !== font.hhea.ascent,
         hheaDescentDif: font.descent !== font.hhea.descent,
         typoAscentDif: font.ascent !== os2.typoAscender,
-        typeDescentDif: font.descent !== os2.typoAscender,
+        typoDescentDif: font.descent !== os2.typoAscender,
       };
 
       fonts.push(res);

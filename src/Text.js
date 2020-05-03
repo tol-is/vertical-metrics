@@ -3,8 +3,6 @@ import { useContext } from 'preact/hooks';
 import { css } from 'emotion';
 import FontContext from './FontContext';
 
-import Guide from './Guide';
-
 export default ({ children, fontSize, lineHeight = 1.2 }) => {
   const { font } = useContext(FontContext);
 
@@ -23,7 +21,7 @@ export default ({ children, fontSize, lineHeight = 1.2 }) => {
           vertical-align: top;
           position: relative;
           font-family: '${font.familyName}';
-          font-weight: ${fontt['OS/2'].usWeightClass};
+          font-weight: ${font['OS/2'].usWeightClass};
           font-size: ${fontSize}px;
           line-height: ${lineHeight};
           background-color: transparent;

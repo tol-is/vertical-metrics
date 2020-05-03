@@ -5,10 +5,20 @@ import FontContext from './FontContext';
 
 import Guide from './Guide';
 
-export default ({ children, fontSize, lineHeight = 1.2 }) => {
+export default ({ children, fontSize, lineHeight = 1.2, use = 'hhea' }) => {
   const { font } = useContext(FontContext);
 
-  const { capHeight, xHeight, ascent, descent, unitsPerEm } = font;
+  let { capHeight, xHeight, ascent, descent, unitsPerEm } = font;
+
+  if (use === 'win') {
+    ascent = font['OS/2'].winAscent;
+    descent = font['OS/2'].winDescent * -1;
+  }
+
+  if (use === 'typo') {
+    ascent = font['OS/2'].typoAscender;
+    descent = font['OS/2'].typoDescender;
+  }
 
   const lineHeightRatio = lineHeight;
   const capHeightRatio = capHeight / unitsPerEm;
@@ -39,8 +49,8 @@ export default ({ children, fontSize, lineHeight = 1.2 }) => {
         height={boundingBoxRatio * fontSize}
         origin={originOffset}
         y={originOffset}
-        x={110}
-        width={100}
+        x={fontSize * 0.3 + 2}
+        width={fontSize * 0.3}
         label="bounding box"
       />
 
@@ -50,7 +60,7 @@ export default ({ children, fontSize, lineHeight = 1.2 }) => {
         height={lineHeightRatio * fontSize}
         y={0}
         x={0}
-        width={100}
+        width={fontSize * 0.3}
         label="line-height"
       />
       <span
@@ -67,6 +77,9 @@ export default ({ children, fontSize, lineHeight = 1.2 }) => {
           background-color: transparent;
           outline:none;
           color: inherit;
+          white-space: nowrap;
+       
+          text-overflow: clip;
         `}
       >
         {children}

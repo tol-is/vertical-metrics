@@ -7,10 +7,23 @@ import Main from './Main';
 
 const App = () => {
   const [font, setFont] = useState();
-  const [features, setFeatures] = useState();
+  const [text, setText] = useState('Xxfg');
+  const [fontSize, setFontSize] = useState(200);
+  const [lineHeight, setLineHeight] = useState(1);
 
   return (
-    <FontContext.Provider value={{ font, setFont, features, setFeatures }}>
+    <FontContext.Provider
+      value={{
+        font,
+        setFont,
+        fontSize,
+        setFontSize,
+        text,
+        setText,
+        lineHeight,
+        setLineHeight,
+      }}
+    >
       <FontLoader />
       {font && <Main />}
     </FontContext.Provider>

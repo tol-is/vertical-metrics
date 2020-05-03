@@ -3,22 +3,37 @@ import { useContext, useEffect, useState } from 'preact/hooks';
 import { css, injectGlobal } from 'emotion';
 import fontkit from 'fontkit';
 import { useRoute } from 'wouter-preact';
-
 import blobToBuffer from 'blob-to-buffer';
 
 import FontContext from './FontContext';
 
+import Dropdown from './Dropdown';
+import Slider from './Slider';
+
 import fonts from './fonts.json';
 
-// 2860
-
+let h3 = css`
+  font-size: 14px;
+  margin: 0 0 1em 0;
+  @media (min-width: 60rem) {
+    font-size: 18px;
+  }
+`;
 export default () => {
   //
-  const { setFont } = useContext(FontContext);
-  // const [idx, setIdx] = useState(120);
-  const [match, params] = useRoute('/:idx');
+  const {
+    font,
+    setFont,
+    text,
+    setText,
+    fontSize,
+    setFontSize,
+    lineHeight,
+    setLineHeight,
+  } = useContext(FontContext);
 
-  const { idx = 0 } = params;
+  const [match, params] = useRoute('/:idx');
+  const { idx = 0 } = params || {};
 
   useEffect(() => {
     let file = fonts[idx].file;
@@ -52,7 +67,6 @@ export default () => {
   };
 
   const useFont = ({ fontData, font }) => {
-    console.log(font);
     if (!font) return;
     setFont(font);
 
@@ -67,5 +81,105 @@ export default () => {
     `;
   };
 
-  return null;
+  return (
+    font && (
+      <header
+        className={css`
+          position: fixed;
+          top: 16px;
+          z-index: 999;
+          background-color: rgba(255, 255, 255, 0.9);
+          width: 100%;
+          padding: 0 20px;
+          display: grid;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          grid-column-gap: 20px;
+          @media (min-width: 60rem) {
+            top: 32px;
+            padding: 0 64px;
+            grid-column-gap: 64px;
+            grid-template-columns: repeat(12, minmax(0, 1fr));
+          }
+        `}
+      >
+        <div
+          className={css`
+            grid-column: span 1;
+            align-self: center;
+            @media (min-width: 60rem) {
+              grid-column: span 3;
+            }
+          `}
+        >
+          <h3 className={h3}>Font</h3>
+          <Dropdown
+            selected={`${fonts[idx].family} - ${fonts[idx].key}`}
+            options={fonts}
+          />
+        </div>
+        <div
+          className={css`
+            grid-column: span 1;
+            align-self: center;
+            @media (min-width: 60rem) {
+              grid-column: span 3;
+            }
+          `}
+        >
+          <h3 className={h3}>Font Size: {`${fontSize}px`}</h3>
+          <div
+            className={css`
+              height: 48px;
+              display: flex;
+              align-items: center;
+            `}
+          >
+            <Slider
+              min={12}
+              max={240}
+              step={1}
+              value={fontSize}
+              onInput={(e) => setFontSize(e.target.value)}
+            />
+          </div>
+        </div>
+
+        <div
+          className={css`
+            grid-column: span 1;
+            align-self: center;
+            @media (min-width: 60rem) {
+              grid-column: span 3;
+            }
+          `}
+        >
+          <h3 className={h3}>Text</h3>
+          <div
+            className={css`
+              height: 48px;
+            `}
+          >
+            <input
+              type="text"
+              value={text}
+              onInput={(e) => setText(e.target.value)}
+              className={css`
+                height: 48px;
+                font-size: 20px;
+                padding: 0 16px;
+                line-height: 48px;
+                border: 1px solid #000;
+                width: 100%;
+                &:hover,
+                &:focus {
+                  outline: none;
+                  border: 1px solid #f78ae0;
+                }
+              `}
+            />
+          </div>
+        </div>
+      </header>
+    )
+  );
 };

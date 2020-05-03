@@ -12,7 +12,7 @@ const asyncForEach = async (array, callback) => {
 const downloadFileAsync = async (url) => {
   let fontPromise = new Promise((resolve, reject) => {
     const urlArr = url.split('/');
-    const localPath = `./public/fonts/${urlArr[urlArr.length - 1]}`;
+    const localPath = `./google-fonts/${urlArr[urlArr.length - 1]}`;
     const file = fs.createWriteStream(localPath);
     http.get(url, function (response) {
       response.pipe(file);

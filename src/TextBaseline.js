@@ -6,11 +6,23 @@ import FontContext from './FontContext';
 const baseline = 8;
 const preventCollapse = 1;
 
-export default ({ children, fontSize, leading = 0 }) => {
+export default ({ children, fontSize, leading = 0, use = 'hhea' }) => {
   const { font } = useContext(FontContext);
 
+  let { familyName, unitsPerEm, capHeight, ascent, descent } = font;
+
+  if (use === 'win') {
+    ascent = font['OS/2'].winAscent;
+    descent = font['OS/2'].winDescent * -1;
+  }
+
+  if (use === 'typo') {
+    ascent = font['OS/2'].typoAscender;
+    descent = font['OS/2'].typoDescender;
+  }
+
   // cap height
-  const capHeightRatio = font.capHeight / font.unitsPerEm;
+  const capHeightRatio = capHeight / unitsPerEm;
   const capSize = capHeightRatio * fontSize;
 
   // content box / round up baseline unit
@@ -37,18 +49,18 @@ export default ({ children, fontSize, leading = 0 }) => {
 
   // align to baseline
   const boundingBoxHeight =
-    ((font.ascent + Math.abs(font.descent)) / font.unitsPerEm) * fontSize;
-  const descendHeight = Math.abs(font.descent / font.unitsPerEm) * fontSize;
+    ((ascent + Math.abs(descent)) / unitsPerEm) * fontSize;
+  const descendHeight = Math.abs(descent / unitsPerEm) * fontSize;
   const whiteSpaceHalf = (boundingBoxHeight - lineHeight) / 2;
   const baselineOffset = -1 * (whiteSpaceHalf - descendHeight);
 
   return (
-    <span
-      className={css`
-          display: inline-block;
-          vertical-align: baseline;
+    <div className={css``}>
+      <span
+        className={css`
+          display: block;
           position: relative;
-          font-family: '${font.familyName}';
+          font-family: '${familyName}';
           font-weight: ${font['OS/2'].usWeightClass};
           font-size: ${fontSize}px;
           line-height: ${lineHeight}px;
@@ -61,8 +73,9 @@ export default ({ children, fontSize, leading = 0 }) => {
             height: 0;
           }
         `}
-    >
-      {children}
-    </span>
+      >
+        {children}
+      </span>
+    </div>
   );
 };

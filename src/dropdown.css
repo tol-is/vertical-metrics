@@ -1,0 +1,67 @@
+.dropbtn {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Helvetica Neue',
+    sans-serif;
+  background-color: #000;
+  color: white;
+  height: 48px;
+  font-size: 18px;
+  padding: 1px 24px 0 24px;
+  line-height: 48px;
+  border: none;
+  width: 100%;
+  cursor: pointer;
+  text-align: left;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Helvetica Neue',
+    sans-serif;
+  font-size: 18px;
+  width: 20em;
+  color: black;
+  height: 48px;
+  line-height: 48px;
+  padding: 0 24px 0 24px;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content,
+.dropdown.active .dropdown-content {
+  display: block;
+  height: calc(100vh - 176px);
+  overflow-y: scroll;
+}
+
+.dropbtn:focus,
+.dropbtn:hover,
+.dropdown:hover .dropbtn,
+.dropdown.active .dropbtn {
+  background-color: #f78ae0;
+  outline: none;
+}

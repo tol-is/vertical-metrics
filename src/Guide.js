@@ -1,7 +1,7 @@
 import { h } from 'preact';
 import { css } from 'emotion';
 
-const RulerH = ({ unit = 'px', y, label }) => {
+const RulerH = ({ unit = 'px', y, label, right }) => {
   return (
     <span
       className={css`
@@ -16,11 +16,14 @@ const RulerH = ({ unit = 'px', y, label }) => {
       <span
         className={css`
           position: absolute;
-          text-align: right;
-          left: -1rem;
-          transform: translateX(-100%) translateY(-50%);
+          text-align: ${right ? 'left' : 'right'};
+          left: ${right ? 'auto' : '-1rem'};
+          right: ${right ? '-1em' : 'auto'};
+          transform: ${right ? 'translateX(100%)' : 'translateX(-100%)'}
+            translateY(-50%);
           font-size: 8px;
-          font-family: Helvetica;
+          font-family: system-ui, -apple-system, BlinkMacSystemFont,
+            'Helvetica Neue';
         `}
       >
         {label}
@@ -34,7 +37,7 @@ const Box = ({
   x = 0,
   y = 0,
   origin,
-  width = '15%',
+  width = '0.02em',
   height = '40px',
   label,
 }) => {
@@ -53,7 +56,7 @@ const Box = ({
           display: block;
           width: ${`${width}${unit}`};
           height: ${`${height}${unit}`};
-          background-color: rgba(0, 0, 0, 0.4);
+          background-color: rgba(255, 0, 255, 0.2);
           transform: translateY(${origin - 1}px);
           bottom: ${`${y}${unit}`};
         `}
