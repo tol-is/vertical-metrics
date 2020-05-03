@@ -29,9 +29,12 @@ const downloadFonts = async (webfonts) => {
     const fileKeys = Object.keys(webfont.files);
 
     await asyncForEach(fileKeys, async (key) => {
+      console.log(webfont.family);
+      const localPath = await downloadFileAsync(webfont.files[key]);
       fonts.push({
         family: webfont.family,
         file: webfont.files[key],
+        local: localPath,
         key: key,
       });
     });

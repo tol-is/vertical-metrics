@@ -2,7 +2,7 @@ const fs = require('fs');
 
 const fontkit = require('fontkit');
 
-const googleFonts = require('./fonts.json');
+const googleFonts = require('./src/fonts.json');
 
 // based on https://github.com/developit/dlv
 const get = (obj, key, def) => {
@@ -26,6 +26,7 @@ const asyncForEach = async (array, callback) => {
 };
 
 const analyzeFontSync = (file) => {
+  console.log(file);
   const font = fontkit.openSync(file);
   return font;
 };
@@ -33,46 +34,38 @@ const analyzeFontSync = (file) => {
 const analyze = async () => {
   const fonts = [];
   await asyncForEach(googleFonts, async (webfont) => {
-    const fileKeys = Object.keys(webfont.files);
-    await asyncForEach(fileKeys, async (key) => {
-      const font = await analyzeFontSync(webfont.files[key]);
+    const font = await analyzeFontSync(webfont.local);
 
-      const os2 = font['OS/2'];
-      const family = get(
-        font,
-        'name.records.preferredFamily.en',
-        font.familyName
-      );
+    const os2 = font['OS/2'];
+    const family = get(
+      font,
+      'name.records.preferredFamily.en',
+      font.familyName
+    );
 
-      const res = {
-        file: webfont.files[key],
-        family: family,
-        weight: os2.usWeightClass,
-        italic: os2.fsSelection.italic,
-        upm: font.unitsPerEm,
-        xHeight: font.xHeight,
-        capHeight: font.capHeight,
-        ascender: font.ascent,
-        descender: font.descent,
-        useTypoMetrics: os2.fsSelection.useTypoMetrics,
-        typoAscender: os2.typoAscender,
-        typoDescender: os2.typoDescender,
-        typoLineGap: os2.typoLineGap,
-        winAscent: os2.winAscent,
-        winDescent: os2.winDescent,
-        hheaAscender: font.hhea.ascent,
-        hheaDescender: font.hhea.descent,
-        hheaLineGap: font.hhea.hheaLineGap,
-        winAscentDif: font.ascent !== os2.winAscent,
-        winDescentDif: font.descent !== os2.winAscent,
-        hheaAscentDif: font.ascent !== font.hhea.ascent,
-        hheaDescentDif: font.descent !== font.hhea.descent,
-        typoAscentDif: font.ascent !== os2.typoAscender,
-        typoDescentDif: font.descent !== os2.typoAscender,
-      };
+    const res = {
+      family: family,
+      weight: os2.usWeightClass,
+      italic: os2.fsSelection.italic,
+      upm: font.unitsPerEm,
+      xHeight: font.xHeight,
+      capHeight: font.capHeight,
+      useTypoMetrics: os2.fsSelection.useTypoMetrics,
+      hheaAscender: font.hhea.ascent,
+      typoAscender: os2.typoAscender,
+      winAscent: os2.winAscent,
+      winAscentDif: font.hhea.ascent - os2.winAscent,
+      hheaAscentDif: font.hhea.ascent - font.hhea.ascent,
+      typoAscentDif: font.hhea.ascent - os2.typoAscender,
+      hheaDescender: font.hhea.descent,
+      typoDescender: os2.typoDescender,
+      winDescent: os2.winDescent,
+      winDescentDif: font.hhea.descent - os2.winDescent,
+      hheaDescentDif: font.hhea.descent - font.hhea.descent,
+      typoDescentDif: font.hhea.descent - os2.typoDescender,
+    };
 
-      fonts.push(res);
-    });
+    fonts.push(res);
   });
 
   let json = JSON.stringify(fonts, null, 4);
