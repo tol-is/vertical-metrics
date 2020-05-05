@@ -250,9 +250,13 @@ export default () => {
               <td> {font.unitsPerEm}</td>
             </tr>
             <tr>
-              <td>Use Typo Metrics</td>
               <td>
-                {font['OS/2'].fsSelection.useTypoMetrics ? 'true' : 'false'}
+                <b>Use Typo Metrics</b>
+              </td>
+              <td>
+                <b>
+                  {font['OS/2'].fsSelection.useTypoMetrics ? 'true' : 'false'}
+                </b>
               </td>
             </tr>
           </table>
