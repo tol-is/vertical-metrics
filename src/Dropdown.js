@@ -1,6 +1,7 @@
 import { Component, h } from 'preact';
 import { useContext, useEffect, useState } from 'preact/hooks';
 import { css, injectGlobal } from 'emotion';
+import { Link } from 'wouter-preact';
 
 import FontContext from './FontContext';
 
@@ -20,9 +21,9 @@ export default ({ selected, options }) => {
       </button>
       <div class="dropdown-content">
         {options.map((f, idx) => (
-          <a href={idx} tabIndex={-1}>
+          <Link href={`/${idx}`} tabIndex={-1}>
             {f.family} - {f.key}
-          </a>
+          </Link>
         ))}
       </div>
     </div>
