@@ -3,11 +3,38 @@ import { useContext } from 'preact/hooks';
 import { css } from 'emotion';
 import FontContext from './FontContext';
 
-const baseline = 8;
 const preventCollapse = 1;
 
+const Grid = ({ children }) => {
+  const { baseline } = useContext(FontContext);
+
+  let grid = css`
+    display:block;
+    position: relative;
+    background-repeat: repeat;
+    background-osition: center bottom;
+    background-size: 100% ${baseline * 2}px;
+    background-image: linear-gradient(
+    to bottom,
+    rgba(255, 0, 255, 0.2) ${baseline}px,
+    transparent ${baseline}px
+    );
+    &:after {
+      content: "";
+      display: block;
+      position: absolute;
+      width: 100%;
+      height: 1px;
+      bottom: 0;
+      background-color: rgba(255, 0, 255, 0.2);
+    },
+  `;
+
+  return <div className={grid}>{children}</div>;
+};
+
 export default ({ children, fontSize, leading = 0, use = 'hhea' }) => {
-  const { font } = useContext(FontContext);
+  const { font, baseline } = useContext(FontContext);
 
   let { familyName, unitsPerEm, capHeight, ascent, descent } = font;
 
@@ -55,7 +82,7 @@ export default ({ children, fontSize, leading = 0, use = 'hhea' }) => {
   const baselineOffset = -1 * (whiteSpaceHalf - descendHeight);
 
   return (
-    <div className={css``}>
+    <Grid>
       <span
         className={css`
           display: block;
@@ -66,6 +93,7 @@ export default ({ children, fontSize, leading = 0, use = 'hhea' }) => {
           line-height: ${lineHeight}px;
           transform: translateY(${baselineOffset}px);
           padding-top: ${preventCollapse}px;
+          word-break: break-all;
           &:before {
             content: '';
             margin-top: ${-(cropHeight + preventCollapse)}px;
@@ -76,6 +104,6 @@ export default ({ children, fontSize, leading = 0, use = 'hhea' }) => {
       >
         {children}
       </span>
-    </div>
+    </Grid>
   );
 };

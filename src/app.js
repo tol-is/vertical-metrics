@@ -10,6 +10,8 @@ const App = () => {
   const [text, setText] = useState('Xxfg');
   const [fontSize, setFontSize] = useState(200);
   const [lineHeight, setLineHeight] = useState(1);
+  const [leading, setLeading] = useState(0);
+  const [baseline, setBaseline] = useState(8);
   const [metrics, setMetrics] = useState(false);
 
   return (
@@ -23,8 +25,12 @@ const App = () => {
         setText,
         lineHeight,
         setLineHeight,
+        baseline,
+        setBaseline,
         metrics,
         setMetrics,
+        leading,
+        setLeading,
       }}
     >
       <FontLoader />

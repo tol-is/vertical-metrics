@@ -41,7 +41,8 @@ export default ({ children, fontSize, lineHeight = 1.2, use = 'hhea' }) => {
       className={css`
         position: relative;
         flex: 0;
-        display: inline-block;
+        display: block;
+        width: 100%;
       `}
     >
       <Guide.Box
@@ -66,7 +67,7 @@ export default ({ children, fontSize, lineHeight = 1.2, use = 'hhea' }) => {
       <span
         type="text"
         className={css`
-          width: auto;
+          width: 100%;
           display: block;
           vertical-align: top;
           position: relative;
@@ -78,8 +79,7 @@ export default ({ children, fontSize, lineHeight = 1.2, use = 'hhea' }) => {
           outline:none;
           color: inherit;
           white-space: nowrap;
-       
-          text-overflow: clip;
+          
         `}
       >
         {children}

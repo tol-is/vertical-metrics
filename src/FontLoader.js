@@ -33,6 +33,10 @@ export default () => {
     setLineHeight,
     metrics,
     setMetrics,
+    leading,
+    setLeading,
+    baseline,
+    setBaseline,
   } = useContext(FontContext);
 
   const [match, params] = useRoute('/:idx');
@@ -101,10 +105,33 @@ export default () => {
             top: 32px;
             padding: 0 64px;
             grid-column-gap: 64px;
-            grid-template-columns: repeat(12, minmax(0, 1fr));
+            grid-template-columns: repeat(17, minmax(0, 1fr));
           }
         `}
       >
+        <div
+          className={css`
+            grid-column: span 1;
+            align-self: center;
+            @media (min-width: 60rem) {
+              grid-column: span 2;
+            }
+          `}
+        >
+          <h3 className={h3}>Baseline Grid/Metrics</h3>
+          <div
+            className={css`
+              height: 48px;
+            `}
+          >
+            <Switch
+              checked={metrics}
+              onInput={(e) => {
+                setMetrics(e.target.checked);
+              }}
+            />
+          </div>
+        </div>
         <div
           className={css`
             grid-column: span 1;
@@ -120,32 +147,7 @@ export default () => {
             options={fonts}
           />
         </div>
-        <div
-          className={css`
-            grid-column: span 1;
-            align-self: center;
-            @media (min-width: 60rem) {
-              grid-column: span 3;
-            }
-          `}
-        >
-          <h3 className={h3}>Font Size: {`${fontSize}px`}</h3>
-          <div
-            className={css`
-              height: 48px;
-              display: flex;
-              align-items: center;
-            `}
-          >
-            <Slider
-              min={12}
-              max={240}
-              step={1}
-              value={fontSize}
-              onInput={(e) => setFontSize(e.target.value)}
-            />
-          </div>
-        </div>
+
         <div
           className={css`
             grid-column: span 1;
@@ -181,6 +183,7 @@ export default () => {
             />
           </div>
         </div>
+
         <div
           className={css`
             grid-column: span 1;
@@ -190,20 +193,109 @@ export default () => {
             }
           `}
         >
-          <h3 className={h3}>Baseline Grid/Metrics</h3>
+          <h3 className={h3}>Font Size: {`${fontSize}px`}</h3>
           <div
             className={css`
               height: 48px;
+              display: flex;
+              align-items: center;
             `}
           >
-            <Switch
-              checked={metrics}
-              onInput={(e) => {
-                setMetrics(e.target.checked);
-              }}
+            <Slider
+              min={12}
+              max={240}
+              step={1}
+              value={fontSize}
+              onInput={(e) => setFontSize(e.target.value)}
             />
           </div>
         </div>
+
+        {metrics && (
+          <div
+            className={css`
+              grid-column: span 1;
+              align-self: center;
+              @media (min-width: 60rem) {
+                grid-column: span 3;
+              }
+            `}
+          >
+            <h3 className={h3}>Line Height: {`${lineHeight}`}</h3>
+            <div
+              className={css`
+                height: 48px;
+                display: flex;
+                align-items: center;
+              `}
+            >
+              <Slider
+                min={0.5}
+                max={3}
+                step={0.1}
+                value={lineHeight}
+                onInput={(e) => setLineHeight(e.target.value)}
+              />
+            </div>
+          </div>
+        )}
+        {!metrics && (
+          <div
+            className={css`
+              grid-column: span 1;
+              align-self: center;
+              @media (min-width: 60rem) {
+                grid-column: span 3;
+              }
+            `}
+          >
+            <h3 className={h3}>Leading: {`${leading}`}</h3>
+            <div
+              className={css`
+                height: 48px;
+                display: flex;
+                align-items: center;
+              `}
+            >
+              <Slider
+                min={0}
+                max={10}
+                step={1}
+                value={leading}
+                onInput={(e) => setLeading(e.target.value)}
+              />
+            </div>
+          </div>
+        )}
+
+        {!metrics && (
+          <div
+            className={css`
+              grid-column: span 1;
+              align-self: center;
+              @media (min-width: 60rem) {
+                grid-column: span 3;
+              }
+            `}
+          >
+            <h3 className={h3}>Baseline: {`${baseline}`}</h3>
+            <div
+              className={css`
+                height: 48px;
+                display: flex;
+                align-items: center;
+              `}
+            >
+              <Slider
+                min={2}
+                max={80}
+                step={1}
+                value={baseline}
+                onInput={(e) => setBaseline(e.target.value)}
+              />
+            </div>
+          </div>
+        )}
       </header>
     )
   );

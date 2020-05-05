@@ -9,24 +9,6 @@ import TextMetrics from './TextMetrics';
 
 import './main.css';
 
-let grid = css`
-  color: #000;
-  position: relative;
-  border-top: 1px solid rgba(255, 0, 255, 0.15);
-  background-repeat: repeat;
-  background-image: linear-gradient(
-    0deg,
-    rgba(255, 0, 255, 0.5) 6.25%,
-    #ffffff 6.25%,
-    #ffffff 50%,
-    rgba(255, 0, 255, 0.5) 50%,
-    rgba(255, 0, 255, 0.5) 56.25%,
-    #ffffff 56.25%,
-    #ffffff 100%
-  );
-  background-size: 16px 16px;
-`;
-
 let h2 = css`
   font-size: 20px;
   margin: 0 0 1em 0;
@@ -36,7 +18,9 @@ let h2 = css`
 `;
 
 export default () => {
-  const { font, text, fontSize, lineHeight, metrics } = useContext(FontContext);
+  const { font, text, fontSize, lineHeight, leading, metrics } = useContext(
+    FontContext
+  );
 
   if (!font) return null;
   return (
@@ -102,15 +86,17 @@ export default () => {
                 : 'Baseline Horizontal Header Table'}
             </h2>
             {metrics ? (
-              <TextMetrics fontSize={fontSize} lineHeight={1} use="hhea">
+              <TextMetrics
+                fontSize={fontSize}
+                lineHeight={lineHeight}
+                use="hhea"
+              >
                 {text}
               </TextMetrics>
             ) : (
-              <div className={grid}>
-                <TextBaseline fontSize={fontSize} leading={0} use="hhea">
-                  {text}
-                </TextBaseline>
-              </div>
+              <TextBaseline fontSize={fontSize} leading={leading} use="hhea">
+                {text}
+              </TextBaseline>
             )}
           </section>
 
@@ -136,15 +122,17 @@ export default () => {
               {metrics ? 'Win Metrics' : 'Baseline Win Metrics'}
             </h2>
             {metrics ? (
-              <TextMetrics fontSize={fontSize} lineHeight={1} use="win">
+              <TextMetrics
+                fontSize={fontSize}
+                lineHeight={lineHeight}
+                use="win"
+              >
                 {text}
               </TextMetrics>
             ) : (
-              <div className={grid}>
-                <TextBaseline fontSize={fontSize} leading={0} use="win">
-                  {text}
-                </TextBaseline>
-              </div>
+              <TextBaseline fontSize={fontSize} leading={leading} use="win">
+                {text}
+              </TextBaseline>
             )}
           </section>
 
@@ -169,15 +157,17 @@ export default () => {
               {metrics ? 'Typo Metrics' : 'Baseline Typo Metrics'}
             </h2>
             {metrics ? (
-              <TextMetrics fontSize={fontSize} lineHeight={1} use="typo">
+              <TextMetrics
+                fontSize={fontSize}
+                lineHeight={lineHeight}
+                use="typo"
+              >
                 {text}
               </TextMetrics>
             ) : (
-              <div className={grid}>
-                <TextBaseline fontSize={fontSize} leading={0} use={'typo'}>
-                  {text}
-                </TextBaseline>
-              </div>
+              <TextBaseline fontSize={fontSize} leading={leading} use={'typo'}>
+                {text}
+              </TextBaseline>
             )}
           </section>
         </div>
