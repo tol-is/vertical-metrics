@@ -190,7 +190,7 @@ export default () => {
             }
           `}
         >
-          <h3 className={h3}>Show Metrics</h3>
+          <h3 className={h3}>Baseline Grid/Metrics</h3>
           <div
             className={css`
               height: 48px;
