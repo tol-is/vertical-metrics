@@ -1,5 +1,5 @@
 import { Component, h, render } from 'preact';
-import { useState } from 'preact/hooks';
+import { useState, useEffect } from 'preact/hooks';
 
 import FontContext from './FontContext';
 import FontLoader from './FontLoader';
@@ -10,6 +10,7 @@ const App = () => {
   const [text, setText] = useState('Xxfg');
   const [fontSize, setFontSize] = useState(200);
   const [lineHeight, setLineHeight] = useState(1);
+  const [metrics, setMetrics] = useState(false);
 
   return (
     <FontContext.Provider
@@ -22,6 +23,8 @@ const App = () => {
         setText,
         lineHeight,
         setLineHeight,
+        metrics,
+        setMetrics,
       }}
     >
       <FontLoader />

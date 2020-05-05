@@ -3,6 +3,8 @@ import { createContext } from 'preact';
 export default createContext({
   font: null,
   features: null,
+  metrics: false,
+  setMetrics: () => null,
   setFont: () => 1,
   setFeatures: () => 1,
   fontSize: 80,

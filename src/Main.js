@@ -36,9 +36,8 @@ let h2 = css`
 `;
 
 export default () => {
-  const { font, text, fontSize, lineHeight } = useContext(FontContext);
+  const { font, text, fontSize, lineHeight, metrics } = useContext(FontContext);
 
-  console.log(font);
   if (!font) return null;
   return (
     <div
@@ -98,11 +97,17 @@ export default () => {
             `}
           >
             <h2 className={h2}>Baseline Horizontal Header Table</h2>
-            <div className={grid}>
-              <TextBaseline fontSize={fontSize} leading={0} use="hhea">
+            {metrics ? (
+              <TextMetrics fontSize={fontSize} lineHeight={1} use="hhea">
                 {text}
-              </TextBaseline>
-            </div>
+              </TextMetrics>
+            ) : (
+              <div className={grid}>
+                <TextBaseline fontSize={fontSize} leading={0} use="hhea">
+                  {text}
+                </TextBaseline>
+              </div>
+            )}
           </section>
 
           {/* <section
@@ -124,11 +129,17 @@ export default () => {
             `}
           >
             <h2 className={h2}>Baseline Win Metrics</h2>
-            <div className={grid}>
-              <TextBaseline fontSize={fontSize} leading={0} use="win">
+            {metrics ? (
+              <TextMetrics fontSize={fontSize} lineHeight={1} use="win">
                 {text}
-              </TextBaseline>
-            </div>
+              </TextMetrics>
+            ) : (
+              <div className={grid}>
+                <TextBaseline fontSize={fontSize} leading={0} use="win">
+                  {text}
+                </TextBaseline>
+              </div>
+            )}
           </section>
 
           {/* <section
@@ -149,11 +160,17 @@ export default () => {
             `}
           >
             <h2 className={h2}>Baseline Typo Metrics</h2>
-            <div className={grid}>
-              <TextBaseline fontSize={fontSize} leading={0} use={'typo'}>
+            {metrics ? (
+              <TextMetrics fontSize={fontSize} lineHeight={1} use="typo">
                 {text}
-              </TextBaseline>
-            </div>
+              </TextMetrics>
+            ) : (
+              <div className={grid}>
+                <TextBaseline fontSize={fontSize} leading={0} use={'typo'}>
+                  {text}
+                </TextBaseline>
+              </div>
+            )}
           </section>
         </div>
 

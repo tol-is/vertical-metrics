@@ -9,6 +9,7 @@ import FontContext from './FontContext';
 
 import Dropdown from './Dropdown';
 import Slider from './Slider';
+import Switch from './Switch';
 
 import fonts from './fonts.json';
 
@@ -30,6 +31,8 @@ export default () => {
     setFontSize,
     lineHeight,
     setLineHeight,
+    metrics,
+    setMetrics,
   } = useContext(FontContext);
 
   const [match, params] = useRoute('/:idx');
@@ -143,7 +146,6 @@ export default () => {
             />
           </div>
         </div>
-
         <div
           className={css`
             grid-column: span 1;
@@ -176,6 +178,29 @@ export default () => {
                   border: 1px solid #f78ae0;
                 }
               `}
+            />
+          </div>
+        </div>
+        <div
+          className={css`
+            grid-column: span 1;
+            align-self: center;
+            @media (min-width: 60rem) {
+              grid-column: span 3;
+            }
+          `}
+        >
+          <h3 className={h3}>Show Metrics</h3>
+          <div
+            className={css`
+              height: 48px;
+            `}
+          >
+            <Switch
+              checked={metrics}
+              onInput={(e) => {
+                setMetrics(e.target.checked);
+              }}
             />
           </div>
         </div>
