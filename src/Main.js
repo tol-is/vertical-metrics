@@ -96,7 +96,11 @@ export default () => {
               grid-column: span 1;
             `}
           >
-            <h2 className={h2}>Baseline Horizontal Header Table</h2>
+            <h2 className={h2}>
+              {metrics
+                ? 'Horizontal Header Table'
+                : 'Baseline Horizontal Header Table'}
+            </h2>
             {metrics ? (
               <TextMetrics fontSize={fontSize} lineHeight={1} use="hhea">
                 {text}
@@ -128,7 +132,9 @@ export default () => {
               grid-column: span 1;
             `}
           >
-            <h2 className={h2}>Baseline Win Metrics</h2>
+            <h2 className={h2}>
+              {metrics ? 'Win Metrics' : 'Baseline Win Metrics'}
+            </h2>
             {metrics ? (
               <TextMetrics fontSize={fontSize} lineHeight={1} use="win">
                 {text}
@@ -159,7 +165,9 @@ export default () => {
               grid-column: span 1;
             `}
           >
-            <h2 className={h2}>Baseline Typo Metrics</h2>
+            <h2 className={h2}>
+              {metrics ? 'Typo Metrics' : 'Baseline Typo Metrics'}
+            </h2>
             {metrics ? (
               <TextMetrics fontSize={fontSize} lineHeight={1} use="typo">
                 {text}
