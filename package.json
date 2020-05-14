@@ -33,7 +33,7 @@
     "download": "node download-google-fonts.js"
   },
   "staticFiles": {
-    "staticPath": "public",
+    "staticPath": "static",
     "watcherGlob": "**"
   }
 }
