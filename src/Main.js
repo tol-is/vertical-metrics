@@ -310,7 +310,7 @@ export default () => {
 
           <h3 className={h3}>Windows</h3>
           <p>
-            On Windows, all browsers use the usWin metrics, but also respect the
+            On Windows, all browsers use the usWin metrics, but respect the
             useTypoMetrics setting and if set will use the OS/2 values.
           </p>
         </section>
