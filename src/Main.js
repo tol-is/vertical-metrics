@@ -303,7 +303,8 @@ export default () => {
           <p>
             On the Mac, Safari and Chrome use the hhea values to render text.
             Firefox will respect the useTypoMetrics setting and will use the
-            OS/2 if it is set. Otherwise it will use the hhea metrics
+            OS/2 if it is set. Otherwise it will use metrics from the hhea
+            table.
           </p>
 
           <h3 className={h3}>Windows</h3>
