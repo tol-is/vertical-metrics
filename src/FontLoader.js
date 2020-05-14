@@ -101,6 +101,7 @@ export default () => {
           display: grid;
           grid-template-columns: repeat(3, minmax(0, 1fr));
           grid-column-gap: 20px;
+          grid-row-gap: 20px;
           @media (min-width: 60rem) {
             top: 32px;
             padding: 0 64px;

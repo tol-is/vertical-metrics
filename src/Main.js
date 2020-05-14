@@ -32,7 +32,7 @@ export default () => {
         }
       `}
     >
-      <div>
+      <main>
         <div
           className={css`
             display: grid;
@@ -172,7 +172,7 @@ export default () => {
           </section>
         </div>
 
-        <div
+        <section
           className={css`
             display: grid;
             grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -275,8 +275,9 @@ export default () => {
               <td> {font.xHeight}</td>
             </tr>
           </table>
-        </div>
-      </div>
+        </section>
+      </main>
+
       <footer
         className={css`
           width: 100%;
