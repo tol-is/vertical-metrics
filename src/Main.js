@@ -304,14 +304,14 @@ export default () => {
           <p>
             On the Mac, Safari and Chrome use the hhea values to render text.
             Firefox will respect the useTypoMetrics setting and will use the
-            OS/2 if it is set. If the useTypoMetrics is not set, it will use
-            metrics from the hhea table.
+            OS/2 if it is set. If the useTypoMetrics is not set, Firefox will
+            also use metrics from the hhea table.
           </p>
 
           <h3 className={h3}>Windows</h3>
           <p>
             On Windows, all browsers use the usWin metrics, but also respect the
-            useTypoMetrics setting and will use the OS/2 metrics is set.
+            useTypoMetrics setting and if set will use the OS/2 values.
           </p>
         </section>
       </main>
