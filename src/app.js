@@ -12,7 +12,7 @@ const App = () => {
   const [lineHeight, setLineHeight] = useState(1);
   const [leading, setLeading] = useState(0);
   const [baseline, setBaseline] = useState(8);
-  const [metrics, setMetrics] = useState(false);
+  const [metrics, setMetrics] = useState(true);
 
   return (
     <FontContext.Provider
