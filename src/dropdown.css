@@ -36,7 +36,8 @@
     sans-serif;
   font-size: 18px;
   width: 20em;
-  color: black;
+  color: #2a2a2a !important;
+
   height: 48px;
   line-height: 48px;
   padding: 0 24px 0 24px;
@@ -48,6 +49,10 @@
 /* Change color of dropdown links on hover */
 .dropdown-content a:hover {
   background-color: #f1f1f1;
+  color: #f78ae0 !important;
+}
+.dropdown-content a:focus {
+  outline: 1px solid #f78ae0 !important;
 }
 
 /* Show the dropdown menu on hover */

@@ -281,16 +281,32 @@ export default () => {
         className={css`
           width: 100%;
           margin-top: 100px;
+          margin-right: 10px;
           text-align: right;
+          font-size: 14px;
+          & > * {
+            color: #fd62ff;
+            margin-right: 20px;
+          }
         `}
       >
         <a
           className={css`
             display: inline;
+            color: #fd62ff;
           `}
-          href="https://a7sc11u.dev"
+          href="https://github.com/a7sc11u"
         >
           A7SC11U
+        </a>
+        <a
+          className={css`
+            display: inline;
+            color: #fd62ff;
+          `}
+          href="https://github.com/a7sc11u/styled-baseline-metrics"
+        >
+          GITHUB
         </a>
       </footer>
     </div>

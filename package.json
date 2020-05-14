@@ -29,6 +29,7 @@
     "start": "parcel src/index.html",
     "build": "parcel build src/index.html",
     "analyze": "node analyze-google-fonts.js",
+    "compare": "node compare-results.js",
     "download": "node download-google-fonts.js"
   },
   "staticFiles": {
