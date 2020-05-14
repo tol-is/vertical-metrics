@@ -297,7 +297,8 @@ export default () => {
             between lines of text. For historical reasons, there are three pairs
             of ascender/descender values, known as hhea, OS/2 and uSWin metrics.
             Depending on the font, operating system and application a different
-            set will be used to render text on the screen. The browser too.
+            set will be used to render text on the screen. This test is about
+            the browser.
           </p>
           <h3 className={h3}>Mac</h3>
           <p>
