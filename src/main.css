@@ -35,3 +35,7 @@ td:last-child {
   width: 4em;
   text-align: right;
 }
+
+p {
+  line-height: 1.625;
+}

@@ -10,10 +10,26 @@ import TextMetrics from './TextMetrics';
 import './main.css';
 
 let h2 = css`
-  font-size: 20px;
+  font-size: 24px;
   margin: 0 0 1em 0;
   @media (min-width: 60rem) {
-    font-size: 24px;
+    font-size: 30px;
+  }
+`;
+
+let h3 = css`
+  font-size: 20px;
+  margin: 1em 0 1em 0;
+  @media (min-width: 60rem) {
+    font-size: 22px;
+  }
+`;
+
+let h2_alt = css`
+  font-size: 20px;
+  margin: 0em 0 2em 0;
+  @media (min-width: 60rem) {
+    font-size: 22px;
   }
 `;
 
@@ -80,11 +96,7 @@ export default () => {
               grid-column: span 1;
             `}
           >
-            <h2 className={h2}>
-              {metrics
-                ? 'Horizontal Header Table'
-                : 'Baseline Horizontal Header Table'}
-            </h2>
+            <h2 className={h2_alt}>{metrics ? 'Hhea' : 'Hhea'}</h2>
             {metrics ? (
               <TextMetrics
                 fontSize={fontSize}
@@ -118,9 +130,7 @@ export default () => {
               grid-column: span 1;
             `}
           >
-            <h2 className={h2}>
-              {metrics ? 'Win Metrics' : 'Baseline Win Metrics'}
-            </h2>
+            <h2 className={h2_alt}>{metrics ? 'usWin' : 'usWin'}</h2>
             {metrics ? (
               <TextMetrics
                 fontSize={fontSize}
@@ -153,9 +163,7 @@ export default () => {
               grid-column: span 1;
             `}
           >
-            <h2 className={h2}>
-              {metrics ? 'Typo Metrics' : 'Baseline Typo Metrics'}
-            </h2>
+            <h2 className={h2_alt}>{metrics ? 'OS/2' : 'OS/2'}</h2>
             {metrics ? (
               <TextMetrics
                 fontSize={fontSize}
@@ -207,7 +215,7 @@ export default () => {
           </table>
           <table>
             <tr>
-              <th colSpan={2}>Win Metrics</th>
+              <th colSpan={2}>usWin Metrics</th>
             </tr>
             <tr>
               <td>ascender</td>
@@ -220,7 +228,7 @@ export default () => {
           </table>
           <table>
             <tr>
-              <th colSpan={2}>Typo Metrics</th>
+              <th colSpan={2}>OS/2 Metrics</th>
             </tr>
             <tr>
               <td>ascender</td>
@@ -276,18 +284,49 @@ export default () => {
             </tr>
           </table>
         </section>
+
+        <section
+          className={css`
+            margin-top: 104px;
+            max-width: 55ch;
+          `}
+        >
+          <h2 className={h2}>Wtf</h2>
+          <p>
+            Vertical metrics determine the baseline in a text and the space
+            between lines of text. For historical reasons, there are three pairs
+            of ascender/descender values, known as hhea, OS/2 and uSWin metrics.
+            Depending on the font, operating system and application a different
+            set will be used to render text on the screen. The browser too.
+          </p>
+          <h3 className={h3}>Mac</h3>
+          <p>
+            On the Mac, Safari and Chrome use the hhea values to render text.
+            Firefox will respect the useTypoMetrics setting and will use the
+            OS/2 if it is set. Otherwise it will use the hhea metrics
+          </p>
+
+          <h3 className={h3}>Windows</h3>
+          <p>
+            On Windows, all browsers respect the useTypoMetrics setting. If set,
+            will use the OS/2 metrics, otherwise they will use the usWin metrics
+          </p>
+        </section>
       </main>
 
       <footer
         className={css`
           width: 100%;
-          margin-top: 100px;
+          margin-top: 40px;
           margin-right: 10px;
           text-align: right;
           font-size: 14px;
           & > * {
             color: #fd62ff;
             margin-right: 20px;
+          }
+          @media (min-width: 80rem) {
+            margin-top: 0px;
           }
         `}
       >

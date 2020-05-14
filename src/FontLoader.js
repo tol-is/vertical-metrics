@@ -67,6 +67,7 @@ export default () => {
       var reader = new FileReader();
       reader.onload = function (e) {
         const font = fontkit.create(buffer);
+        console.log(font);
         useFont({ fontData: reader.result, font });
       };
       reader.readAsDataURL(blob);
