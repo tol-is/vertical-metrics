@@ -52,12 +52,6 @@ const analyze = async () => {
       capHeight: font.capHeight,
       useTypoMetrics: os2.fsSelection.useTypoMetrics,
 
-      useTypoMetrics
-      typoAscentDif
-      typoDescentDif
-      winAscentDif
-      winDescentDif
-
       hheaAscender: font.hhea.ascent,
       typoAscender: os2.typoAscender,
       winAscent: os2.winAscent,
