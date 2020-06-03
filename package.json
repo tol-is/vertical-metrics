@@ -1,7 +1,8 @@
 {
-  "name": "analyze-fonts",
-  "version": "0.0.1",
-  "author": "Apostolos Christodoulou <me@tol.is>",
+  "name": "vertical-metrics",
+  "version": "1.0.0",
+  "description": "",
+	"author": "Apostolos Christodoulou <a7sc11u@gmail.com> (@a7sc11u)",
   "license": "ISC",
   "dependencies": {
     "async": "^3.1.1",
