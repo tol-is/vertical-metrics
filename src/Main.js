@@ -341,15 +341,6 @@ export default () => {
         >
           A7SC11U
         </a>
-        <a
-          className={css`
-            display: inline;
-            color: #fd62ff;
-          `}
-          href="https://github.com/a7sc11u/styled-baseline-metrics"
-        >
-          GITHUB
-        </a>
       </footer>
     </div>
   );

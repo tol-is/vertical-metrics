@@ -9,6 +9,7 @@
     "blob-to-buffer": "^1.2.8",
     "emotion": "^10.0.27",
     "fontkit": "^1.8.1",
+    "history": "^4.10.1",
     "lodash": "^4.17.15",
     "node-fetch": "^2.6.0",
     "parcel-plugin-static-files-copy": "^2.3.1",
