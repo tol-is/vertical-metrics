@@ -214,7 +214,7 @@ export default () => {
             grid-column: span 1;
             align-self: center;
             @media (min-width: 60rem) {
-              grid-column: span 3;
+              grid-column: span 6;
             }
           `}
         >
@@ -299,7 +299,7 @@ export default () => {
           </div>
         </div>
 
-        <div
+        {/* <div
           className={css`
             grid-column: span 1;
             align-self: center;
@@ -361,7 +361,7 @@ export default () => {
               />
             </div>
           </div>
-        </div>
+        </div> */}
       </header>
     )
   );
