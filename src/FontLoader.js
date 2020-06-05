@@ -8,7 +8,6 @@ import { createBrowserHistory } from 'history';
 
 import FontContext from './FontContext';
 
-import Dropdown from './Dropdown';
 import Slider from './Slider';
 import Switch from './Switch';
 
@@ -34,15 +33,16 @@ export default () => {
     setFontSize,
     lineHeight,
     setLineHeight,
-    metrics,
-    setMetrics,
-    leading,
-    setLeading,
-    baseline,
-    setBaseline,
+    hhea,
+    setHhea,
+    win,
+    setWin,
+    typo,
+    setTypo,
   } = useContext(FontContext);
 
   const [uploaded, setUploaded] = useState(false);
+
   const [match, params] = useRoute('/:idx');
   const { idx = -1 } = params || {};
 
@@ -127,7 +127,7 @@ export default () => {
           @media (min-width: 60rem) {
             padding: 32px 64px 32px 64px;
             grid-column-gap: 64px;
-            grid-template-columns: repeat(17, minmax(0, 1fr));
+            grid-template-columns: repeat(18, minmax(0, 1fr));
           }
         `}
       >
@@ -154,7 +154,7 @@ export default () => {
                 height: 48px;
               `}
             >
-              {uploaded ? font.familyName : 'Select Font File'}
+              {uploaded ? font.familyName : 'Font File'}
               <input
                 type="file"
                 onChange={onFileSelect}
@@ -214,7 +214,7 @@ export default () => {
             grid-column: span 1;
             align-self: center;
             @media (min-width: 60rem) {
-              grid-column: span 5;
+              grid-column: span 3;
             }
           `}
         >
@@ -272,74 +272,46 @@ export default () => {
           </div>
         </div>
 
-        {metrics && (
+        <div
+          className={css`
+            grid-column: span 1;
+            align-self: center;
+            @media (min-width: 60rem) {
+              grid-column: span 3;
+            }
+          `}
+        >
+          <h3 className={h3}>Line Height: {`${lineHeight}`}</h3>
           <div
             className={css`
-              grid-column: span 1;
-              align-self: center;
-              @media (min-width: 60rem) {
-                grid-column: span 3;
-              }
+              height: 48px;
+              display: flex;
+              align-items: center;
             `}
           >
-            <h3 className={h3}>Line Height: {`${lineHeight}`}</h3>
-            <div
-              className={css`
-                height: 48px;
-                display: flex;
-                align-items: center;
-              `}
-            >
-              <Slider
-                min={0.5}
-                max={3}
-                step={0.1}
-                value={lineHeight}
-                onInput={(e) => setLineHeight(e.target.value)}
-              />
-            </div>
+            <Slider
+              min={0.5}
+              max={3}
+              step={0.1}
+              value={lineHeight}
+              onInput={(e) => setLineHeight(e.target.value)}
+            />
           </div>
-        )}
-        {!metrics && (
-          <div
-            className={css`
-              grid-column: span 1;
-              align-self: center;
-              @media (min-width: 60rem) {
-                grid-column: span 3;
-              }
-            `}
-          >
-            <h3 className={h3}>Leading: {`${leading}`}</h3>
-            <div
-              className={css`
-                height: 48px;
-                display: flex;
-                align-items: center;
-              `}
-            >
-              <Slider
-                min={0}
-                max={10}
-                step={1}
-                value={leading}
-                onInput={(e) => setLeading(e.target.value)}
-              />
-            </div>
-          </div>
-        )}
+        </div>
 
-        {!metrics && (
-          <div
-            className={css`
-              grid-column: span 1;
-              align-self: center;
-              @media (min-width: 60rem) {
-                grid-column: span 3;
-              }
-            `}
-          >
-            <h3 className={h3}>Baseline: {`${baseline}`}</h3>
+        <div
+          className={css`
+            grid-column: span 1;
+            align-self: center;
+            @media (min-width: 60rem) {
+              grid-column: span 3;
+            }
+            display: flex;
+            justify-content: space-between;
+          `}
+        >
+          <div>
+            <h3 className={h3}>Hhea</h3>
             <div
               className={css`
                 height: 48px;
@@ -347,16 +319,49 @@ export default () => {
                 align-items: center;
               `}
             >
-              <Slider
-                min={2}
-                max={80}
-                step={1}
-                value={baseline}
-                onInput={(e) => setBaseline(e.target.value)}
+              <Switch
+                checked={hhea}
+                onInput={(e) => {
+                  setHhea(e.target.checked);
+                }}
               />
             </div>
           </div>
-        )}
+          <div>
+            <h3 className={h3}>usWin</h3>
+            <div
+              className={css`
+                height: 48px;
+                display: flex;
+                align-items: center;
+              `}
+            >
+              <Switch
+                checked={win}
+                onInput={(e) => {
+                  setWin(e.target.checked);
+                }}
+              />
+            </div>
+          </div>
+          <div>
+            <h3 className={h3}>OS/2</h3>
+            <div
+              className={css`
+                height: 48px;
+                display: flex;
+                align-items: center;
+              `}
+            >
+              <Switch
+                checked={typo}
+                onInput={(e) => {
+                  setTypo(e.target.checked);
+                }}
+              />
+            </div>
+          </div>
+        </div>
       </header>
     )
   );

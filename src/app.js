@@ -10,9 +10,10 @@ const App = () => {
   const [text, setText] = useState('Xxfg');
   const [fontSize, setFontSize] = useState(200);
   const [lineHeight, setLineHeight] = useState(1);
-  const [leading, setLeading] = useState(0);
-  const [baseline, setBaseline] = useState(8);
-  const [metrics, setMetrics] = useState(true);
+
+  const [hhea, setHhea] = useState(true);
+  const [win, setWin] = useState(true);
+  const [typo, setTypo] = useState(true);
 
   return (
     <FontContext.Provider
@@ -25,12 +26,12 @@ const App = () => {
         setText,
         lineHeight,
         setLineHeight,
-        baseline,
-        setBaseline,
-        metrics,
-        setMetrics,
-        leading,
-        setLeading,
+        hhea,
+        setHhea,
+        win,
+        setWin,
+        typo,
+        setTypo,
       }}
     >
       <FontLoader />

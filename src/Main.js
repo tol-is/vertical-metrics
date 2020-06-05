@@ -3,8 +3,6 @@ import { useContext, useState } from 'preact/hooks';
 import { css, cx } from 'emotion';
 
 import FontContext from './FontContext';
-import TextBaseline from './TextBaseline';
-import Text from './Text';
 import TextMetrics from './TextMetrics';
 
 import './main.css';
@@ -19,7 +17,7 @@ let h2 = css`
 
 let h3 = css`
   font-size: 20px;
-  margin: 1em 0 1em 0;
+  margin: 2em 0 1em 0;
   @media (min-width: 60rem) {
     font-size: 22px;
   }
@@ -34,9 +32,17 @@ let h2_alt = css`
 `;
 
 export default () => {
-  const { font, text, fontSize, lineHeight, leading, metrics } = useContext(
-    FontContext
-  );
+  const {
+    font,
+    text,
+    fontSize,
+    lineHeight,
+    leading,
+    metrics,
+    hhea,
+    typo,
+    win,
+  } = useContext(FontContext);
 
   if (!font) return null;
   return (
@@ -52,52 +58,18 @@ export default () => {
         <div
           className={css`
             display: grid;
-            grid-template-columns: repeat(1, minmax(0, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             grid-column-gap: 20px;
             grid-row-gap: 120px;
             @media (min-width: 60rem) {
-              grid-template-columns: repeat(3, minmax(0, 1fr));
               grid-column-gap: 64px;
               grid-row-gap: 240px;
             }
           `}
         >
-          {/* <section
-          className={css`
-            grid-column: span 2;
-          `}
-        >
-          <h2 className={h2}>Native: line-height:1</h2>
-          <div
-            className={css`
-              border-top: 1px solid rgba(0, 0, 0, 0.4);
-              border-bottom: 1px solid rgba(0, 0, 0, 0.4);
-            `}
-          >
-            <Text fontSize={fontSize} lineHeight={lineHeight}>
-              {text}
-            </Text>
-          </div>
-        </section> */}
-          {/* <section
-          className={css`
-            grid-column: 1 / span 1;
-          `}
-        >
-          <h2 className={h2}>HHEA Metrics</h2>
-          <div>
-            <TextMetrics fontSize={fontSize} lineHeight={lineHeight} use="hhea">
-              {text}
-            </TextMetrics>
-          </div>
-        </section> */}
-          <section
-            className={css`
-              grid-column: span 1;
-            `}
-          >
-            <h2 className={h2_alt}>{metrics ? 'Hhea' : 'Hhea'}</h2>
-            {metrics ? (
+          {hhea && (
+            <section className={css``}>
+              <h2 className={h2_alt}>{metrics ? 'Hhea' : 'Hhea'}</h2>
               <TextMetrics
                 fontSize={fontSize}
                 lineHeight={lineHeight}
@@ -105,33 +77,28 @@ export default () => {
               >
                 {text}
               </TextMetrics>
-            ) : (
-              <TextBaseline fontSize={fontSize} leading={leading} use="hhea">
-                {text}
-              </TextBaseline>
-            )}
-          </section>
 
-          {/* <section
-          className={css`
-            grid-column: 1 / span 1;
-          `}
-        >
-          <h2 className={h2}>Win metrics</h2>
-          <div>
-            <TextMetrics fontSize={fontSize} lineHeight={lineHeight} use="win">
-              {text}
-            </TextMetrics>
-          </div>
-        </section> */}
+              <table
+                className={css`
+                  margin-top: 96px;
+                  width: 100%;
+                `}
+              >
+                <tr>
+                  <td>ascender</td>
+                  <td>{font.hhea.ascent}</td>
+                </tr>
+                <tr>
+                  <td>descender</td>
+                  <td>{font.hhea.descent}</td>
+                </tr>
+              </table>
+            </section>
+          )}
+          {win && (
+            <section className={css``}>
+              <h2 className={h2_alt}>{metrics ? 'usWin' : 'usWin'}</h2>
 
-          <section
-            className={css`
-              grid-column: span 1;
-            `}
-          >
-            <h2 className={h2_alt}>{metrics ? 'usWin' : 'usWin'}</h2>
-            {metrics ? (
               <TextMetrics
                 fontSize={fontSize}
                 lineHeight={lineHeight}
@@ -139,32 +106,29 @@ export default () => {
               >
                 {text}
               </TextMetrics>
-            ) : (
-              <TextBaseline fontSize={fontSize} leading={leading} use="win">
-                {text}
-              </TextBaseline>
-            )}
-          </section>
 
-          {/* <section
-          className={css`
-            grid-column: 1 / span 1;
-          `}
-        >
-          <h2 className={h2}>OS/2 typo metrics</h2>
-          <div>
-            <TextMetrics fontSize={fontSize} lineHeight={lineHeight} use="typo">
-              {text}
-            </TextMetrics>
-          </div>
-        </section> */}
-          <section
-            className={css`
-              grid-column: span 1;
-            `}
-          >
-            <h2 className={h2_alt}>{metrics ? 'OS/2' : 'OS/2'}</h2>
-            {metrics ? (
+              <table
+                className={css`
+                  margin-top: 96px;
+                  width: 100%;
+                `}
+              >
+                <tr>
+                  <td>ascender</td>
+                  <td>{font['OS/2'].winAscent}</td>
+                </tr>
+                <tr>
+                  <td>descender</td>
+                  <td>{font['OS/2'].winDescent}</td>
+                </tr>
+              </table>
+            </section>
+          )}
+
+          {typo && (
+            <section className={css``}>
+              <h2 className={h2_alt}>{metrics ? 'OS/2' : 'OS/2'}</h2>
+
               <TextMetrics
                 fontSize={fontSize}
                 lineHeight={lineHeight}
@@ -172,26 +136,35 @@ export default () => {
               >
                 {text}
               </TextMetrics>
-            ) : (
-              <TextBaseline fontSize={fontSize} leading={leading} use={'typo'}>
-                {text}
-              </TextBaseline>
-            )}
-          </section>
+
+              <table
+                className={css`
+                  margin-top: 96px;
+                  width: 100%;
+                `}
+              >
+                <tr>
+                  <td>ascender</td>
+                  <td>{font['OS/2'].typoAscender}</td>
+                </tr>
+                <tr>
+                  <td>descender</td>
+                  <td>{font['OS/2'].typoDescender}</td>
+                </tr>
+              </table>
+            </section>
+          )}
         </div>
 
         <section
           className={css`
             display: grid;
             grid-template-columns: repeat(2, minmax(0, 1fr));
-            grid-auto-rows: 180px;
             grid-column-gap: 20px;
-            margin-top: 100px;
             @media (min-width: 60rem) {
               grid-template-columns: repeat(3, minmax(0, 1fr));
             }
             @media (min-width: 80rem) {
-              margin-top: 120px;
               grid-template-columns: repeat(3, minmax(0, 1fr));
               grid-column-gap: 64px;
             }
@@ -200,45 +173,6 @@ export default () => {
             }
           `}
         >
-          <table>
-            <tr>
-              <th colSpan={2}>Horizontal Header Table</th>
-            </tr>
-            <tr>
-              <td>ascender</td>
-              <td>{font.hhea.ascent}</td>
-            </tr>
-            <tr>
-              <td>descender</td>
-              <td>{font.hhea.descent}</td>
-            </tr>
-          </table>
-          <table>
-            <tr>
-              <th colSpan={2}>usWin Metrics</th>
-            </tr>
-            <tr>
-              <td>ascender</td>
-              <td>{font['OS/2'].winAscent}</td>
-            </tr>
-            <tr>
-              <td>descender</td>
-              <td>{font['OS/2'].winDescent}</td>
-            </tr>
-          </table>
-          <table>
-            <tr>
-              <th colSpan={2}>OS/2 Metrics</th>
-            </tr>
-            <tr>
-              <td>ascender</td>
-              <td>{font['OS/2'].typoAscender}</td>
-            </tr>
-            <tr>
-              <td>descender</td>
-              <td>{font['OS/2'].typoDescender}</td>
-            </tr>
-          </table>
           <table>
             <tr>
               <th colSpan={2}>&nbsp;</th>
@@ -287,7 +221,7 @@ export default () => {
 
         <section
           className={css`
-            margin-top: 104px;
+            margin-top: 96px;
             max-width: 55ch;
           `}
         >
