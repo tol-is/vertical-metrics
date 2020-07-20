@@ -10,7 +10,7 @@
     "emotion": "^10.0.27",
     "fontkit": "^1.8.1",
     "history": "^4.10.1",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "node-fetch": "^2.6.0",
     "parcel-plugin-static-files-copy": "^2.3.1",
     "preact": "^10.4.1",
