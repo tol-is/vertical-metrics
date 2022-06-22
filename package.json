@@ -5,7 +5,7 @@
   "author": "Apostolos Christodoulou <a7sc11u@gmail.com> (@a7sc11u)",
   "license": "ISC",
   "dependencies": {
-    "async": "^3.1.1",
+    "async": "^3.2.2",
     "blob-to-buffer": "^1.2.8",
     "emotion": "^10.0.27",
     "fontkit": "^1.8.1",
