@@ -11,7 +11,7 @@
     "fontkit": "^1.8.1",
     "history": "^4.10.1",
     "lodash": "^4.17.15",
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^2.6.7",
     "parcel-plugin-static-files-copy": "^2.3.1",
     "preact": "^10.4.1",
     "request": "^2.88.2",
